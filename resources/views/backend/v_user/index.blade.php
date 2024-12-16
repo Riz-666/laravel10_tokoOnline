@@ -3,7 +3,7 @@
 
 
     <!-- contentAwal -->
-    
+
     <a href="{{ route('backend.user.create') }}">
         <button class="btn btn-primary" type="button"><i class="fa fa-plus"></i> Add</button>
     </a>
@@ -40,7 +40,7 @@
                     @elseif ($row->status == 0)
                     <span class="badge badge-secondary">Non-Active</span>
                 @endif </td>
-                <td>
+                <td> 
                     <a href="{{ route('backend.user.edit',$row->id) }}" class="btn btn-warning btn-sm" type="button"><i class="fa fa-edit"></i> Edit</a>
 
                     {{-- Tinggal pasang SA true/false --}}

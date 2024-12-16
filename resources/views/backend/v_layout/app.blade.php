@@ -54,40 +54,33 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('backend.index') }}" aria-expanded="false"><i
-                                    class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ Route('backend.user.index') }}" aria-expanded="false"><i
-                                    class="fa fa-user"></i><span class="hide-menu">User</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
-                                    class="hide-menu">Data Produk</span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.index') }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ Route('backend.user.index') }}" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">User</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-box"></i><span class="hide-menu">Data Produk</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
-                                        href="javascript:void(0)" aria-expanded="false"><span
+                                <li class="sidebar-item"><a class="sidebar-link"
+                                        href="{{ Route('backend.kategori.index') }}" aria-expanded="false"><span
                                             class="hide-menu"></i><span class="hide-menu"> Ketegori </span></a>
-                                    <ul aria-expanded="false" class="collapse  first-level">
-                                        <li class="sidebar-item"><a href="form-basic.html" class="sidebar-link"><i
-                                                    class="fa fa-box"></i><span class="hide-menu"> Barang </span></a>
-                                        </li>
-                                        <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i
-                                                    class="fa fa-utensils"></i><span class="hide-menu"> Makanan
-                                                </span></a></li>
-                                    </ul>
+
                                 </li>
-                                <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
-                                        href="javascript:void(0)" aria-expanded="false"><span
+                                <li class="sidebar-item"><a class="sidebar-link"
+                                        href="{{ Route('backend.produk.index') }}" aria-expanded="false"><span
                                             class="hide-menu"></i><span class="hide-menu"></i><span class="hide-menu">
                                                     Produk </span></a>
-                                    <ul aria-expanded="false" class="collapse  first-level">
-                                        <li class="sidebar-item"><a href="form-basic.html" class="sidebar-link"><i
-                                                    class="fa fa-box"></i><span class="hide-menu"> Barang </span></a>
-                                        </li>
-                                        <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i
-                                                    class="fa fa-utensils"></i><span class="hide-menu"> Makanan
-                                                </span></a></li>
-                                    </ul>
+                                </li>
+                            </ul>
+
+                            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Laporan </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a class="sidebar-link"
+                                        href="{{ route('backend.laporan.formuser') }}" aria-expanded="false"><span
+                                            class="hide-menu"></i><span class="hide-menu"> User </span></a>
+
+                                </li>
+                                <li class="sidebar-item"><a class="sidebar-link"
+                                        href="{{ route('backend.laporan.formproduk') }}" aria-expanded="false"><span
+                                            class="hide-menu"></i><span class="hide-menu"></i><span class="hide-menu">
+                                                    Produk </span></a>
                                 </li>
                             </ul>
                         </li>
@@ -188,6 +181,17 @@
     <script src="{{ asset('backend/extra-libs/DataTables/datatables.min.js') }}"></script>
     {{-- Sweetalert --}}
     <script src="{{ asset('sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <!-- CKEditor -->
+    <script src="{{ asset('https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js') }}"></script>
+
+    <script>
+        ClassicEditor
+        .create(document.querySelector('#ckeditor'))
+        .catch(error => {
+        console.error(error);
+        });
+        </script>
+
     <script>
         /****************************************
          *       Basic Table                   *
@@ -205,6 +209,7 @@
             });
         </script>
     @endif
+
     <script type="text/javascript">
         //Konfirmasi delete
         $('#show_confirm').click(function(event) {
@@ -231,6 +236,22 @@
         });
     </script>
 
+    {{--***************************************
+    *              PreviewFoto                *
+    ***************************************--}}
+    <script>
+        function previewFoto(){
+            const foto = document.querySelector('input[name="foto"]');
+            const fotoPreview = document.querySelector('.foto-preview');
+            fotoPreview.style.display = 'block';
+            const fotoReader = new FileReader();
+            fotoReader.readAsDataURL(foto.files[0]);
+            fotoReader.onload = function(fotoEvent){
+                fotoPreview.src = fotoEvent.target.result;
+                fotoPreview.style.width = '100%';
+            }
+        }
+    </script>
 
 </body>
 
